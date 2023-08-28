@@ -17,7 +17,7 @@ class _DefaultPageState extends State<DefaultPage> {
   TextStyle qualitiesTextStyle =
       TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
   Color nodeColor = Color(0xffECF2F9);
-  double leftMargin = 20;
+  double indentation = 20;
   Radius radius = Radius.circular(5);
 
   List<String> qualities = List.from(qualitiesList);
@@ -85,7 +85,7 @@ class _DefaultPageState extends State<DefaultPage> {
               children: [
                 for (var el in qualities)
                   Container(
-                    margin: EdgeInsets.only(left: 2 * leftMargin),
+                    margin: EdgeInsets.only(left: 2 * indentation),
                     child: ExpansionTile(
                       controlAffinity: ListTileControlAffinity.leading,
                       trailing: IconButton(
@@ -124,7 +124,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget _qualityDataWidget(String element) {
     return Container(
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(left: 2.5 * leftMargin),
+      margin: EdgeInsets.only(left: 2.5 * indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: radius,
@@ -157,7 +157,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget _primaryDataWidget(String element) {
     return Container(
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: leftMargin),
+      margin: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: nodeColor,
