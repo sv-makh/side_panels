@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:side_panels/data/data.dart';
@@ -30,6 +32,7 @@ class _DefaultPageState extends State<DefaultPage> {
 
   Color nodeColor = const Color(0xffECF2F9);
   Color borderColor = const Color(0xffDADDE5);
+  Color buttonColor = const Color(0xff5A6376);
   double indentation = 41;
   Radius radius = const Radius.circular(6);
   OutlineInputBorder border = OutlineInputBorder(
@@ -104,7 +107,7 @@ class _DefaultPageState extends State<DefaultPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    foregroundColor: const Color(0xff5A6376),
+                    foregroundColor: buttonColor,
                     textStyle: inter12,
                     side: BorderSide(color: borderColor),
                   ),
@@ -122,24 +125,39 @@ class _DefaultPageState extends State<DefaultPage> {
               children: [
                 for (var el in qualities)
                   Container(
-                    margin: EdgeInsets.only(left: 2 * indentation),
-                    child: ExpansionTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      trailing: IconButton(
-                        icon: Icon(TrashIcon.curved_trash),
-                        onPressed: () {
-                          _deleteQuality(el);
-                          setState(() {});
-                        },
+                    margin: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.only(left: indentation,),
+                    child: ListTileTheme(
+                      minVerticalPadding: 0,
+                      contentPadding: EdgeInsets.zero,
+                      dense: true,
+                      child: ExpansionTile(
+                        //tilePadding: EdgeInsets.zero,
+                        //backgroundColor: nodeColor,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: _qualityTitle(el),
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: indentation),
+                            color: nodeColor,
+                            child: Column(
+                              children: [
+                                for (var el in qualityData) _qualityDataWidget(el),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: IconButton(
+                                    icon: Icon(TrashIcon.curved_trash, color: buttonColor,),
+                                    onPressed: () {
+                                      _deleteQuality(el);
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                      title: _qualityTitle(el),
-                      children: [
-                        Column(
-                          children: [
-                            for (var el in qualityData) _qualityDataWidget(el)
-                          ],
-                        )
-                      ],
                     ),
                   )
               ],
@@ -161,13 +179,13 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget _qualityDataWidget(String element) {
     return Container(
       padding: const EdgeInsets.all(10),
-      margin: EdgeInsets.only(left: indentation),
+      //margin: EdgeInsets.only(left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: radius,
           bottomRight: radius,
         ),
-        color: nodeColor,
+        //color: nodeColor,
       ),
       child: _field(element),
     );
@@ -175,8 +193,9 @@ class _DefaultPageState extends State<DefaultPage> {
 
   Widget _qualityTitle(String title) {
     return Container(
-      //margin: EdgeInsets.only(left: 2 * leftMargin),
-      padding: const EdgeInsets.all(5),
+      height: 54,
+      margin: const EdgeInsets.only(left: 5),
+      padding: const EdgeInsets.only(left: 21, bottom: 17, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
