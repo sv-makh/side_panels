@@ -1,18 +1,31 @@
 List<String> firstLevel = ['Основные данные', 'Свойства'];
 
-List<String> qualitiesList = [
-  'Код',
-  'Единица измерения',
-  'Артикул',
-  'Цвет',
-  'Материал',
-  'Уровень экологичности',
-  'Уровень безопасности',
-  'Класс',
+List<String> qualitiesList = ['Наименование'];
+
+List<String> qualityData = [
+  'ID',
+  'Имя',
+  'Метаимя',
   'Тип',
-  'Эргономичность',
+  'Формат',
+  'Пример',
+  'Значимость',
 ];
 
-List<String> qualityData = ['Мета имя', 'Тип', 'Формат', 'Пример'];
+List<String> primaryData = [
+  'Класс ID',
+  'Имя класса',
+  'Описание',
+  'Метаимя',
+];
 
-List<String> primaryData = ['Мета имя', 'Ключевые синонимы', 'Описание класса'];
+enum PropertyTypes {
+  string,
+  number,
+  integer,
+  boolean,
+  array,
+  object,
+  date,
+  dateTime,
+}

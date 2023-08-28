@@ -16,6 +16,7 @@ class MyHomePage extends StatelessWidget {
               },
               child: Text('ExpansionTile'),
             ),
+            Divider(),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/flutter_fancy_tree_view');

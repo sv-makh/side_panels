@@ -18,7 +18,7 @@ class _DefaultPageState extends State<DefaultPage> {
       TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
   Color nodeColor = Color(0xffECF2F9);
   double indentation = 20;
-  Radius radius = Radius.circular(5);
+  Radius radius = Radius.circular(6);
 
   List<String> qualities = List.from(qualitiesList);
 
