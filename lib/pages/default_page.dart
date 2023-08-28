@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:side_panels/data/data.dart';
+import 'package:side_panels/data/trash_icon_icons.dart';
 
 class DefaultPage extends StatefulWidget {
   const DefaultPage({super.key});
@@ -10,7 +11,11 @@ class DefaultPage extends StatefulWidget {
 }
 
 class _DefaultPageState extends State<DefaultPage> {
-  final MultiSplitViewController _controller = MultiSplitViewController();
+  final MultiSplitViewController _controller = MultiSplitViewController(
+    areas: [
+      Area(weight: 0.8),
+    ],
+  );
 
   TextStyle helvetica24 = const TextStyle(
       fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
@@ -43,7 +48,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ExpansionTile'),
+        title: const Text('ExpansionTile'),
       ),
       body: MultiSplitViewTheme(
         data: MultiSplitViewThemeData(
@@ -121,7 +126,7 @@ class _DefaultPageState extends State<DefaultPage> {
                     child: ExpansionTile(
                       controlAffinity: ListTileControlAffinity.leading,
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete),
+                        icon: Icon(TrashIcon.curved_trash),
                         onPressed: () {
                           _deleteQuality(el);
                           setState(() {});

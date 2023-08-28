@@ -100,3 +100,6 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.otf
+    - family:  TrashIcon
+      fonts:
+        - asset: assets/fonts/TrashIcon.ttf
