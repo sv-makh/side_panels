@@ -13,9 +13,9 @@ class _DefaultPageState extends State<DefaultPage> {
   final MultiSplitViewController _controller = MultiSplitViewController();
 
   TextStyle firstLevelTextStyle =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
   TextStyle qualitiesTextStyle =
-      TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 20, fontFamily: 'Inter', fontWeight: FontWeight.bold);
   Color nodeColor = Color(0xffECF2F9);
   double indentation = 20;
   Radius radius = Radius.circular(6);

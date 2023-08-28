@@ -91,3 +91,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: HelveticaNeue
+      fonts:
+        - asset: assets/fonts/Helvetica-Neue-Regular.otf
+        - asset: assets/fonts/Helvetica-Neue-Condensed-Bold.ttf
+          weight: 400
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.otf
