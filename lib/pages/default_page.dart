@@ -23,6 +23,12 @@ class _DefaultPageState extends State<DefaultPage> {
   List<String> qualities = List.from(qualitiesList);
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -3,6 +3,7 @@ import 'package:flutter_fancy_tree_view/flutter_fancy_tree_view.dart';
 
 import '../data/data.dart';
 import '../data/fancy_tree_view/my_node.dart';
+import '../data/fancy_tree_view/roots.dart';
 import '../widgets/fancy_tree_view/my_tree_tile.dart';
 
 class FancyTreeViewPage extends StatefulWidget {
@@ -14,26 +15,6 @@ class FancyTreeViewPage extends StatefulWidget {
 
 class _FancyTreeViewPageState extends State<FancyTreeViewPage> {
   late final TreeController<MyNode> treeController;
-
-  List<MyNode> roots = <MyNode>[
-    MyNode(
-        title: firstLevel[0],
-        children: List.generate(
-            primaryData.length, (index) => MyNode(title: primaryData[index]))),
-    MyNode(
-      title: firstLevel[1],
-      children: List.generate(
-        qualitiesList.length,
-        (index) => MyNode(
-          title: qualitiesList[index],
-          children: List.generate(
-            qualityData.length,
-            (index) => MyNode(title: qualityData[index]),
-          ),
-        ),
-      ),
-    ),
-  ];
 
   @override
   void initState() {
@@ -61,6 +42,7 @@ class _FancyTreeViewPageState extends State<FancyTreeViewPage> {
         nodeBuilder: (BuildContext context, TreeEntry<MyNode> entry) {
           return MyTreeTile(
             key: ValueKey(entry.node),
+            controller: treeController,
             entry: entry,
             onTap: () => treeController.toggleExpansion(entry.node),
           );
