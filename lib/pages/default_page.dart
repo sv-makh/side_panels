@@ -12,11 +12,15 @@ class DefaultPage extends StatefulWidget {
 class _DefaultPageState extends State<DefaultPage> {
   final MultiSplitViewController _controller = MultiSplitViewController();
 
-  TextStyle firstLevelTextStyle = const TextStyle(
+  TextStyle helvetica24 = const TextStyle(
       fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
-  TextStyle qualitiesTextStyle =
-      const TextStyle(fontSize: 14, fontFamily: 'Inter',);// fontWeight: FontWeight.bold);
-  TextStyle subQuantitiesTextStyle = const TextStyle(
+  TextStyle inter14 = const TextStyle(
+      fontSize: 14, fontFamily: 'Inter', color: Color(0xff464F60));
+  TextStyle inter12 = const TextStyle(
+    fontSize: 12,
+    fontFamily: 'Inter',
+  );
+  TextStyle helvetica16 = const TextStyle(
       fontSize: 16, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
 
   Color nodeColor = const Color(0xffECF2F9);
@@ -73,7 +77,7 @@ class _DefaultPageState extends State<DefaultPage> {
               controlAffinity: ListTileControlAffinity.leading,
               title: Text(
                 firstLevel[0],
-                style: firstLevelTextStyle,
+                style: helvetica24,
               ),
               children: [
                 Column(
@@ -86,16 +90,29 @@ class _DefaultPageState extends State<DefaultPage> {
             ExpansionTile(
               initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
-              trailing: OutlinedButton(
-                onPressed: () {
-                  _addQuality();
-                  setState(() {});
-                },
-                child: Text('+ Добавить свойство'),
+              trailing: SizedBox(
+                height: 28,
+                width: 149,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.only(right: 8, left: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    foregroundColor: const Color(0xff5A6376),
+                    textStyle: inter12,
+                    side: BorderSide(color: borderColor),
+                  ),
+                  onPressed: () {
+                    _addQuality();
+                    setState(() {});
+                  },
+                  child: const Text('+ Добавить свойство'),
+                ),
               ),
               title: Text(
                 firstLevel[1],
-                style: firstLevelTextStyle,
+                style: helvetica24,
               ),
               children: [
                 for (var el in qualities)
@@ -104,7 +121,7 @@ class _DefaultPageState extends State<DefaultPage> {
                     child: ExpansionTile(
                       controlAffinity: ListTileControlAffinity.leading,
                       trailing: IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                         onPressed: () {
                           _deleteQuality(el);
                           setState(() {});
@@ -138,7 +155,7 @@ class _DefaultPageState extends State<DefaultPage> {
 
   Widget _qualityDataWidget(String element) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       margin: EdgeInsets.only(left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -154,7 +171,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget _qualityTitle(String title) {
     return Container(
       //margin: EdgeInsets.only(left: 2 * leftMargin),
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -164,14 +181,14 @@ class _DefaultPageState extends State<DefaultPage> {
       ),
       child: Text(
         title,
-        style: subQuantitiesTextStyle,
+        style: helvetica16,
       ),
     );
   }
 
   Widget _primaryDataWidget(String element) {
     return Container(
-      padding: EdgeInsets.only(right: 21, left: 21, bottom: 12, top: 18),
+      padding: const EdgeInsets.only(right: 21, left: 21, bottom: 12, top: 18),
       margin: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -186,20 +203,23 @@ class _DefaultPageState extends State<DefaultPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         SizedBox(
           height: 32,
           child: TextField(
-            style: qualitiesTextStyle,
+            style: inter14,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
               border: InputBorder.none,
               enabledBorder: border,
               focusedBorder: border,
-              contentPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 6,
+                horizontal: 12,
+              ),
             ),
           ),
         ),
