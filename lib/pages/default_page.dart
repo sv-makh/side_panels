@@ -12,13 +12,20 @@ class DefaultPage extends StatefulWidget {
 class _DefaultPageState extends State<DefaultPage> {
   final MultiSplitViewController _controller = MultiSplitViewController();
 
-  TextStyle firstLevelTextStyle =
-      TextStyle(fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
+  TextStyle firstLevelTextStyle = const TextStyle(
+      fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
   TextStyle qualitiesTextStyle =
-      TextStyle(fontSize: 20, fontFamily: 'Inter', fontWeight: FontWeight.bold);
-  Color nodeColor = Color(0xffECF2F9);
-  double indentation = 20;
-  Radius radius = Radius.circular(6);
+      const TextStyle(fontSize: 14, fontFamily: 'Inter',);// fontWeight: FontWeight.bold);
+  TextStyle subQuantitiesTextStyle = const TextStyle(
+      fontSize: 16, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
+
+  Color nodeColor = const Color(0xffECF2F9);
+  Color borderColor = const Color(0xffDADDE5);
+  double indentation = 41;
+  Radius radius = const Radius.circular(6);
+  OutlineInputBorder border = OutlineInputBorder(
+      borderSide: const BorderSide(color: Color(0xffDADDE5)),
+      borderRadius: BorderRadius.circular(6));
 
   List<String> qualities = List.from(qualitiesList);
 
@@ -37,8 +44,8 @@ class _DefaultPageState extends State<DefaultPage> {
       body: MultiSplitViewTheme(
         data: MultiSplitViewThemeData(
           dividerPainter: DividerPainters.background(
-            color: Color(0xffE8ECED),
-            highlightedColor: Color(0xffE9EDF5),
+            color: const Color(0xffE8ECED),
+            highlightedColor: const Color(0xffE9EDF5),
           ),
         ),
         child: MultiSplitView(
@@ -48,7 +55,7 @@ class _DefaultPageState extends State<DefaultPage> {
               color: Colors.white,
               child: _panel(),
             ),
-            Container(color: Color(0xffF7FCFE))
+            Container(color: const Color(0xffF7FCFE))
           ],
         ),
       ),
@@ -62,6 +69,7 @@ class _DefaultPageState extends State<DefaultPage> {
         child: Column(
           children: [
             ExpansionTile(
+              initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
               title: Text(
                 firstLevel[0],
@@ -76,6 +84,7 @@ class _DefaultPageState extends State<DefaultPage> {
               ],
             ),
             ExpansionTile(
+              initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
               trailing: OutlinedButton(
                 onPressed: () {
@@ -130,7 +139,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Widget _qualityDataWidget(String element) {
     return Container(
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(left: 2.5 * indentation),
+      margin: EdgeInsets.only(left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: radius,
@@ -155,14 +164,14 @@ class _DefaultPageState extends State<DefaultPage> {
       ),
       child: Text(
         title,
-        style: qualitiesTextStyle,
+        style: subQuantitiesTextStyle,
       ),
     );
   }
 
   Widget _primaryDataWidget(String element) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(right: 21, left: 21, bottom: 12, top: 18),
       margin: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: indentation),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -177,14 +186,21 @@ class _DefaultPageState extends State<DefaultPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
-        Container(
-          height: 30,
+        SizedBox(
+          height: 8,
+        ),
+        SizedBox(
+          height: 32,
           child: TextField(
-            decoration: InputDecoration(border: InputBorder.none),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.white,
+            style: qualitiesTextStyle,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              enabledBorder: border,
+              focusedBorder: border,
+              contentPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+            ),
           ),
         ),
       ],
