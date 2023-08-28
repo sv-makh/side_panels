@@ -22,6 +22,12 @@ class MyHomePage extends StatelessWidget {
               },
               child: Text('flutter_fancy_tree_view'),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/animated_tree_view');
+              },
+              child: Text('animated_tree_view'),
+            ),
           ],
         ),
       ),
