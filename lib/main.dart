@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_panels/pages/default_page.dart';
+import 'package:side_panels/pages/fancy_tree_view_page.dart';
 import 'package:side_panels/pages/my_home_page.dart';
 
 void main() {
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(),
-        '/default': (context) => const DefaultPage(),
+        '/ExpansionTile': (context) => const DefaultPage(),
+        '/flutter_fancy_tree_view': (context) => FancyTreeViewPage(),
       },
     );
   }
