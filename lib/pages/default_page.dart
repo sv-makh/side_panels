@@ -33,7 +33,7 @@ class _DefaultPageState extends State<DefaultPage> {
   Color nodeColor = const Color(0xffECF2F9);
   Color borderColor = const Color(0xffDADDE5);
   Color buttonColor = const Color(0xff5A6376);
-  Color dividerColor = const Color(0xffD1D3D6);
+  Color dividerColor = const Color(0xffC1C1C1);
   double indentationLeft = 41;
   double indentationRight = 27;
   double sidePadding = 21;
@@ -61,7 +61,7 @@ class _DefaultPageState extends State<DefaultPage> {
 
   String? _dropdownValue;
 
-  List<String> qualities = List.from(qualitiesList);
+  List<String> attributes = List.from(attributesList);
 
   @override
   void dispose() {
@@ -146,66 +146,7 @@ class _DefaultPageState extends State<DefaultPage> {
                 style: helvetica24,
               ),
               children: [
-                for (var el in qualities)
-                  Container(
-                    margin: EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    padding: EdgeInsets.only(
-                        left: indentationLeft, right: indentationRight),
-                    child: ListTileTheme(
-                      minVerticalPadding: 0,
-                      contentPadding: EdgeInsets.zero,
-                      dense: true,
-                      child: ExpansionTile(
-                        onExpansionChanged: (value) {},
-                        //tilePadding: EdgeInsets.zero,
-                        //backgroundColor: nodeColor,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        title: _qualityTitle(el),
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: indentationLeft),
-                            padding: EdgeInsets.only(
-                                left: sidePadding, right: sidePadding),
-                            color: nodeColor,
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 1,
-                                  color: dividerColor,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(top: 8, bottom: 10),
-                                  child: SizedBox(
-                                    height: fieldHeight,
-                                    child: TextField(
-                                        style: inter14,
-                                        decoration: fieldDecoration),
-                                  ),
-                                ),
-                                for (var el in attributeData)
-                                  _field(el), //_qualityDataWidget(el),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      TrashIcon.curved_trash,
-                                      color: buttonColor,
-                                    ),
-                                    onPressed: () {
-                                      _deleteQuality(el);
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+                for (var el in attributes) _attributeWidget(el),
               ],
             )
           ],
@@ -214,15 +155,85 @@ class _DefaultPageState extends State<DefaultPage> {
     );
   }
 
+  Widget _attributeWidget(String el) {
+    bool isExpanded = false;
+
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: 20,
+      ),
+      padding: EdgeInsets.only(left: indentationLeft, right: indentationRight),
+      child: ListTileTheme(
+        minVerticalPadding: 0,
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+        child: ExpansionTile(
+          onExpansionChanged: (value) {
+            isExpanded = value;
+            setState(() {
+
+            });
+          },
+          //tilePadding: EdgeInsets.zero,
+          //backgroundColor: nodeColor,
+          controlAffinity: ListTileControlAffinity.leading,
+          title: _qualityTitle(el, isExpanded),
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: indentationLeft),
+              padding: EdgeInsets.only(left: sidePadding, right: sidePadding),
+              color: nodeColor,
+              child: Column(
+                children: [
+                  Container(
+                    height: 1,
+                    color: dividerColor,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 8, bottom: 10),
+                    child: SizedBox(
+                      height: fieldHeight,
+                      child: TextField(
+                          style: inter14, decoration: fieldDecoration),
+                    ),
+                  ),
+                  for (var el in attributeData)
+                    _field(el), //_qualityDataWidget(el),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: _deleteIconButton(el),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _deleteIconButton(String el) {
+    return IconButton(
+      icon: Icon(
+        TrashIcon.curved_trash,
+        color: buttonColor,
+      ),
+      onPressed: () {
+        _deleteQuality(el);
+        setState(() {});
+      },
+    );
+  }
+
   void _addQuality() {
-    qualities.add('${qualities.length + 1}th quality');
+    attributes.add('${attributes.length + 1}th quality');
   }
 
   void _deleteQuality(String quality) {
-    qualities.remove(quality);
+    attributes.remove(quality);
   }
 
-  Widget _qualityTitle(String title) {
+  Widget _qualityTitle(String title, bool isExpanded) {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
@@ -234,9 +245,15 @@ class _DefaultPageState extends State<DefaultPage> {
         ),
         color: nodeColor,
       ),
-      child: Text(
-        title,
-        style: helvetica16,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: helvetica16,
+          ),
+          //isExpanded ? SizedBox() : _deleteIconButton(title),
+        ],
       ),
     );
   }

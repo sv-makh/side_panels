@@ -9,9 +9,9 @@ List<MyNode> roots = <MyNode>[
   MyNode(
     title: firstLevel[1],
     children: List.generate(
-      qualitiesList.length,
+      attributesList.length,
           (index) => MyNode(
-        title: qualitiesList[index],
+        title: attributesList[index],
         children: List.generate(
           attributeData.length,
               (index) => MyNode(title: attributeData[index]),
