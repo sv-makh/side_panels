@@ -7,14 +7,14 @@ import '../data/expansion_tile/constants.dart';
 import '../widgets/expansion_tile/attribute_widget.dart';
 import '../widgets/expansion_tile/field_widget.dart';
 
-class DefaultPage extends StatefulWidget {
-  const DefaultPage({super.key});
+class DefaultPage1 extends StatefulWidget {
+  const DefaultPage1({super.key});
 
   @override
-  State<DefaultPage> createState() => _DefaultPageState();
+  State<DefaultPage1> createState() => _DefaultPage1State();
 }
 
-class _DefaultPageState extends State<DefaultPage> {
+class _DefaultPage1State extends State<DefaultPage1> {
   final MultiSplitViewController _controller = MultiSplitViewController(
     areas: [
       Area(weight: 0.8),
@@ -108,8 +108,8 @@ class _DefaultPageState extends State<DefaultPage> {
                 style: helvetica24,
               ),
               children: [
-                for (var el in attributes) _attributeWidget(el),
-                //for (var el in attributes) AttributeWidget(title: el, onDelete: () { _deleteQuality(el); },),
+                //for (var el in attributes) _attributeWidget(el),
+                for (var el in attributes) AttributeWidget(title: el, onDelete: () { _deleteQuality(el); },),
               ],
             )
           ],

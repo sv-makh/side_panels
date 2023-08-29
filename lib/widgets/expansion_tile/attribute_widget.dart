@@ -30,9 +30,9 @@ class _AttributeWidgetState extends State<AttributeWidget> {
         dense: true,
         child: ExpansionTile(
           onExpansionChanged: (value) {
-            isExpanded = value;
             setState(() {
-
+              isExpanded = value;
+              print(isExpanded);
             });
           },
           //tilePadding: EdgeInsets.zero,
@@ -109,7 +109,11 @@ class _AttributeWidgetState extends State<AttributeWidget> {
             title,
             style: helvetica16,
           ),
-          //isExpanded ? SizedBox() : _deleteIconButton(title),
+          isExpanded ? SizedBox() : Container(
+            transform: Matrix4.translationValues(0.0, -8.0, 0.0),
+            padding: const EdgeInsets.only(right: 17.0),
+            child: _deleteIconButton(title),
+          ),
         ],
       ),
     );
