@@ -68,6 +68,6 @@ TreeNode sampleTree = TreeNode.root()
       ..addAll(List.generate(
           qualitiesList.length,
           (index) => TreeNode(key: qualitiesList[index])
-            ..addAll(List.generate(qualityData.length,
-                (index) => TreeNode(key: qualityData[index])))))
+            ..addAll(List.generate(attributeData.length,
+                (index) => TreeNode(key: attributeData[index])))))
   ]);

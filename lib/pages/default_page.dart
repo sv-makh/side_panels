@@ -33,11 +33,33 @@ class _DefaultPageState extends State<DefaultPage> {
   Color nodeColor = const Color(0xffECF2F9);
   Color borderColor = const Color(0xffDADDE5);
   Color buttonColor = const Color(0xff5A6376);
-  double indentation = 41;
+  Color dividerColor = const Color(0xffD1D3D6);
+  double indentationLeft = 41;
+  double indentationRight = 27;
+  double sidePadding = 21;
   Radius radius = const Radius.circular(6);
   OutlineInputBorder border = OutlineInputBorder(
       borderSide: const BorderSide(color: Color(0xffDADDE5)),
       borderRadius: BorderRadius.circular(6));
+
+  InputDecoration fieldDecoration = InputDecoration(
+    filled: true,
+    fillColor: Colors.white,
+    border: InputBorder.none,
+    enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Color(0xffDADDE5)),
+        borderRadius: BorderRadius.circular(6)),
+    focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Color(0xffDADDE5)),
+        borderRadius: BorderRadius.circular(6)),
+    contentPadding: const EdgeInsets.symmetric(
+      vertical: 6,
+      horizontal: 12,
+    ),
+  );
+  double fieldHeight = 32;
+
+  String? _dropdownValue;
 
   List<String> qualities = List.from(qualitiesList);
 
@@ -98,7 +120,8 @@ class _DefaultPageState extends State<DefaultPage> {
             ExpansionTile(
               initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
-              trailing: SizedBox(
+              trailing: Container(
+                margin: EdgeInsets.only(right: indentationRight),
                 height: 28,
                 width: 149,
                 child: OutlinedButton(
@@ -125,28 +148,51 @@ class _DefaultPageState extends State<DefaultPage> {
               children: [
                 for (var el in qualities)
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    padding: EdgeInsets.only(left: indentation,),
+                    margin: EdgeInsets.only(
+                      bottom: 20,
+                    ),
+                    padding: EdgeInsets.only(
+                        left: indentationLeft, right: indentationRight),
                     child: ListTileTheme(
                       minVerticalPadding: 0,
                       contentPadding: EdgeInsets.zero,
                       dense: true,
                       child: ExpansionTile(
+                        onExpansionChanged: (value) {},
                         //tilePadding: EdgeInsets.zero,
                         //backgroundColor: nodeColor,
                         controlAffinity: ListTileControlAffinity.leading,
                         title: _qualityTitle(el),
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: indentation),
+                            margin: EdgeInsets.only(left: indentationLeft),
+                            padding: EdgeInsets.only(
+                                left: sidePadding, right: sidePadding),
                             color: nodeColor,
                             child: Column(
                               children: [
-                                for (var el in qualityData) _qualityDataWidget(el),
+                                Container(
+                                  height: 1,
+                                  color: dividerColor,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top: 8, bottom: 10),
+                                  child: SizedBox(
+                                    height: fieldHeight,
+                                    child: TextField(
+                                        style: inter14,
+                                        decoration: fieldDecoration),
+                                  ),
+                                ),
+                                for (var el in attributeData)
+                                  _field(el), //_qualityDataWidget(el),
                                 Align(
                                   alignment: Alignment.bottomRight,
                                   child: IconButton(
-                                    icon: Icon(TrashIcon.curved_trash, color: buttonColor,),
+                                    icon: Icon(
+                                      TrashIcon.curved_trash,
+                                      color: buttonColor,
+                                    ),
                                     onPressed: () {
                                       _deleteQuality(el);
                                       setState(() {});
@@ -176,26 +222,11 @@ class _DefaultPageState extends State<DefaultPage> {
     qualities.remove(quality);
   }
 
-  Widget _qualityDataWidget(String element) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      //margin: EdgeInsets.only(left: indentation),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: radius,
-          bottomRight: radius,
-        ),
-        //color: nodeColor,
-      ),
-      child: _field(element),
-    );
-  }
-
   Widget _qualityTitle(String title) {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
-      padding: const EdgeInsets.only(left: 21, bottom: 17, top: 17),
+      padding: EdgeInsets.only(left: sidePadding, bottom: 17, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -212,8 +243,10 @@ class _DefaultPageState extends State<DefaultPage> {
 
   Widget _primaryDataWidget(String element) {
     return Container(
-      padding: const EdgeInsets.only(right: 21, left: 21, bottom: 12, top: 18),
-      margin: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: indentation),
+      padding: EdgeInsets.only(
+          right: sidePadding, left: sidePadding, bottom: 12, top: 18),
+      margin: EdgeInsets.only(
+          top: 5, bottom: 5, right: indentationRight, left: indentationLeft),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: nodeColor,
@@ -223,31 +256,38 @@ class _DefaultPageState extends State<DefaultPage> {
   }
 
   Widget _field(String title) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title),
-        const SizedBox(
-          height: 8,
-        ),
-        SizedBox(
-          height: 32,
-          child: TextField(
-            style: inter14,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              border: InputBorder.none,
-              enabledBorder: border,
-              focusedBorder: border,
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 6,
-                horizontal: 12,
-              ),
-            ),
+    return Container(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title),
+          const SizedBox(
+            height: 8,
           ),
-        ),
-      ],
+          SizedBox(
+            height: fieldHeight,
+            child: (title == 'Тип')
+                ? DropdownButtonFormField(
+                    decoration: fieldDecoration,
+                    style: inter14,
+                    hint: (_dropdownValue == null)
+                        ? Text('')
+                        : Text(_dropdownValue!),
+                    items: PropertyTypes.values.map((e) {
+                      return DropdownMenuItem(
+                        child: Text(e.name),
+                        value: e.name,
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      _dropdownValue = value;
+                      setState(() {});
+                    })
+                : TextField(style: inter14, decoration: fieldDecoration),
+          ),
+        ],
+      ),
     );
   }
 }

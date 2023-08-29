@@ -2,9 +2,8 @@ List<String> firstLevel = ['Основные данные', 'Свойства'];
 
 List<String> qualitiesList = ['Наименование'];
 
-List<String> qualityData = [
+List<String> attributeData = [
   'ID',
-  'Имя',
   'Метаимя',
   'Тип',
   'Формат',

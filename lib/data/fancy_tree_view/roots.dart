@@ -13,8 +13,8 @@ List<MyNode> roots = <MyNode>[
           (index) => MyNode(
         title: qualitiesList[index],
         children: List.generate(
-          qualityData.length,
-              (index) => MyNode(title: qualityData[index]),
+          attributeData.length,
+              (index) => MyNode(title: attributeData[index]),
         ),
       ),
     ),

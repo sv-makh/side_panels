@@ -52,8 +52,8 @@ class MyTreeTile extends StatelessWidget {
                                 title:
                                     '${roots[1].children.length + 1} свойство',
                                 children: List.generate(
-                                  qualityData.length,
-                                  (index) => MyNode(title: qualityData[index]),
+                                  attributeData.length,
+                                  (index) => MyNode(title: attributeData[index]),
                                 ),
                               ),
                             );
