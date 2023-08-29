@@ -60,11 +60,13 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                       ),
                     ),
                   ),
-                  for (var el in attributeData)
-                    FieldWidget(title: el),
+                  for (var el in attributeData) FieldWidget(title: el),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: _deleteIconButton(widget.title),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: _deleteIconButton(widget.title),
+                    ),
                   ),
                 ],
               ),
@@ -76,12 +78,11 @@ class _AttributeWidgetState extends State<AttributeWidget> {
   }
 
   Widget _deleteIconButton(String el) {
-    return IconButton(
-      icon: Icon(
+    return InkWell(
+      child: Icon(
         TrashIcon.curved_trash,
-        color: buttonColor,
       ),
-      onPressed: () {
+      onTap: () {
         _deleteQuality(el);
         setState(() {});
       },
@@ -96,7 +97,8 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
-      padding: EdgeInsets.only(left: sidePadding, bottom: isExpanded ? 0 : 17, top: 17),
+      padding: EdgeInsets.only(
+          left: sidePadding, bottom: isExpanded ? 0 : 17, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -113,11 +115,10 @@ class _AttributeWidgetState extends State<AttributeWidget> {
           ),
           isExpanded
               ? SizedBox()
-              : Container(
-                  transform: Matrix4.translationValues(0.0, -8.0, 0.0),
-                  padding: const EdgeInsets.only(right: 17.0),
+              : Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
                   child: _deleteIconButton(title),
-                ),
+                )
         ],
       ),
     );
