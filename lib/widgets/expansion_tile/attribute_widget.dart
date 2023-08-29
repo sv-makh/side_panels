@@ -17,9 +17,17 @@ class AttributeWidget extends StatefulWidget {
 
 class _AttributeWidgetState extends State<AttributeWidget> {
   bool isExpanded = false;
+  String shownTitle = '';
+
+  @override
+  void initState() {
+    super.initState();
+    shownTitle = widget.title;
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(
         bottom: 20,
@@ -36,7 +44,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
             });
           },
           controlAffinity: ListTileControlAffinity.leading,
-          title: _qualityTitle(widget.title, isExpanded),
+          title: _qualityTitle(shownTitle, isExpanded),
           children: [
             Container(
               margin: EdgeInsets.only(left: indentationLeft),
@@ -53,8 +61,11 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                     child: SizedBox(
                       height: fieldHeight,
                       child: TextField(
+                        onChanged: (value) => setState(() {
+                          shownTitle = value;
+                        }),
                         controller: TextEditingController()
-                          ..text = widget.title,
+                          ..text = shownTitle,
                         style: inter14,
                         decoration: fieldDecoration,
                       ),
