@@ -30,7 +30,6 @@ class _AttributeWidgetState extends State<AttributeWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: const EdgeInsets.only(
         bottom: 20,
@@ -48,7 +47,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
             });
           },
           controlAffinity: ListTileControlAffinity.leading,
-          title: _qualityTitle(shownTitle, isExpanded),
+          title: _attributeTitle(shownTitle, isExpanded),
           children: [
             Container(
               margin: EdgeInsets.only(left: indentationLeft),
@@ -68,8 +67,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                         onChanged: (value) => setState(() {
                           shownTitle = value;
                         }),
-                        controller: TextEditingController()
-                          ..text = shownTitle,
+                        controller: TextEditingController()..text = shownTitle,
                         style: inter14,
                         decoration: fieldDecoration,
                       ),
@@ -109,12 +107,11 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     widget.onDelete();
   }
 
-  Widget _qualityTitle(String title, bool isExpanded) {
+  Widget _attributeTitle(String title, bool isExpanded) {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
-      padding: EdgeInsets.only(
-          left: sidePadding, bottom: 17, top: 17),
+      padding: EdgeInsets.only(left: sidePadding, top: 17),//, bottom: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -122,14 +119,17 @@ class _AttributeWidgetState extends State<AttributeWidget> {
         ),
         color: nodeColor,
       ),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: helvetica16,
-          ),
-        ],
+      child: Container(
+        //height: 10,
+        //margin: EdgeInsets.only(right: sidePadding),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),//dividerColor),
+        ),
+        child: Text(
+          title,
+          style: helvetica16,
+        ),
       ),
     );
   }
