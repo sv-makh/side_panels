@@ -72,7 +72,7 @@ class _DefaultPageState extends State<DefaultPage> {
               children: [
                 Column(
                   children: [
-                    for (var el in primaryData) _primaryDataWidget(el)
+                    for (var el in classData) _primaryDataWidget(el)
                   ],
                 )
               ],

@@ -11,11 +11,11 @@ List<String> attributeData = [
   'Значимость',
 ];
 
-List<String> primaryData = [
-  'Класс ID',
+List<String> classData = [
   'Имя класса',
-  'Описание',
+  'Класс ID',
   'Метаимя',
+  'Описание',
 ];
 
 enum PropertyTypes {

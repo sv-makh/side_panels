@@ -5,7 +5,7 @@ List<MyNode> roots = <MyNode>[
   MyNode(
       title: firstLevel[0],
       children: List.generate(
-          primaryData.length, (index) => MyNode(title: primaryData[index]))),
+          classData.length, (index) => MyNode(title: classData[index]))),
   MyNode(
     title: firstLevel[1],
     children: List.generate(

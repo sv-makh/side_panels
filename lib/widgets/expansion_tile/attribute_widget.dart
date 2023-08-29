@@ -5,6 +5,9 @@ import '../../data/expansion_tile/constants.dart';
 import '../../data/expansion_tile/trash_icon_icons.dart';
 import 'field_widget.dart';
 
+//виджет, отображающий одно свойство
+//поля ввода для него отображает виджет FieldWidget
+
 class AttributeWidget extends StatefulWidget {
   String title;
   VoidCallback onDelete;
@@ -29,10 +32,11 @@ class _AttributeWidgetState extends State<AttributeWidget> {
   Widget build(BuildContext context) {
 
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 20,
       ),
       padding: EdgeInsets.only(left: indentationLeft, right: indentationRight),
+      //ListTileTheme нужна чтобы убрать зазор между title и children у ExpansionTile
       child: ListTileTheme(
         minVerticalPadding: 0,
         contentPadding: EdgeInsets.zero,
@@ -57,7 +61,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                     color: dividerColor,
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 8, bottom: 10),
+                    padding: const EdgeInsets.only(top: 8, bottom: 10),
                     child: SizedBox(
                       height: fieldHeight,
                       child: TextField(
@@ -75,7 +79,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(top: 7.0, bottom: 17.0),
                       child: _deleteIconButton(widget.title),
                     ),
                   ),
@@ -89,11 +93,12 @@ class _AttributeWidgetState extends State<AttributeWidget> {
   }
 
   Widget _deleteIconButton(String el) {
-    return InkWell(
-      child: Icon(
+    return IconButton(
+      icon: Icon(
         TrashIcon.curved_trash,
+        color: buttonColor,
       ),
-      onTap: () {
+      onPressed: () {
         _deleteQuality(el);
         setState(() {});
       },
@@ -109,7 +114,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
       height: 54,
       margin: const EdgeInsets.only(left: 5),
       padding: EdgeInsets.only(
-          left: sidePadding, bottom: isExpanded ? 0 : 17, top: 17),
+          left: sidePadding, bottom: 17, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -118,18 +123,12 @@ class _AttributeWidgetState extends State<AttributeWidget> {
         color: nodeColor,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: helvetica16,
           ),
-          isExpanded
-              ? SizedBox()
-              : Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: _deleteIconButton(title),
-                )
         ],
       ),
     );

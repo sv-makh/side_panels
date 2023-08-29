@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:side_panels/data/data.dart';
+import 'package:side_panels/widgets/expansion_tile/class_widget.dart';
 
 import '../data/expansion_tile/constants.dart';
 import '../widgets/expansion_tile/attribute_widget.dart';
-import '../widgets/expansion_tile/field_widget.dart';
 
 class DefaultPage1 extends StatefulWidget {
   const DefaultPage1({super.key});
@@ -19,8 +19,6 @@ class _DefaultPage1State extends State<DefaultPage1> {
       Area(weight: 0.8),
     ],
   );
-
-  String? _dropdownValue;
 
   List<String> attributes = List.from(attributesList);
 
@@ -73,7 +71,7 @@ class _DefaultPage1State extends State<DefaultPage1> {
               children: [
                 Column(
                   children: [
-                    for (var el in primaryData) _primaryDataWidget(el)
+                    for (var el in classData) ClassWidget(title: el)
                   ],
                 )
               ],
@@ -96,7 +94,7 @@ class _DefaultPage1State extends State<DefaultPage1> {
                     side: BorderSide(color: borderColor),
                   ),
                   onPressed: () {
-                    _addQuality();
+                    _addAttribute();
                     setState(() {});
                   },
                   child: const Text('+ Добавить свойство'),
@@ -111,7 +109,7 @@ class _DefaultPage1State extends State<DefaultPage1> {
                   AttributeWidget(
                     title: el,
                     onDelete: () {
-                      _deleteQuality(el);
+                      _deleteAttribute(el);
                     },
                   ),
               ],
@@ -122,26 +120,12 @@ class _DefaultPage1State extends State<DefaultPage1> {
     );
   }
 
-  void _addQuality() {
+  void _addAttribute() {
     attributes.add('${attributes.length + 1} свойство');
   }
 
-  void _deleteQuality(String quality) {
+  void _deleteAttribute(String quality) {
     attributes.remove(quality);
     setState(() { });
-  }
-
-  Widget _primaryDataWidget(String element) {
-    return Container(
-      padding: EdgeInsets.only(
-          right: sidePadding, left: sidePadding, bottom: 12, top: 18),
-      margin: EdgeInsets.only(
-          top: 5, bottom: 5, right: indentationRight, left: indentationLeft),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: nodeColor,
-      ),
-      child: FieldWidget(title: element),
-    );
   }
 }

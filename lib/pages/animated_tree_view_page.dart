@@ -63,7 +63,7 @@ TreeNode sampleTree = TreeNode.root()
   ..addAll([
     TreeNode(key: firstLevel[0])
       ..addAll(List.generate(
-          primaryData.length, (index) => TreeNode(key: primaryData[index]))),
+          classData.length, (index) => TreeNode(key: classData[index]))),
     TreeNode(key: firstLevel[1])
       ..addAll(List.generate(
           attributesList.length,
