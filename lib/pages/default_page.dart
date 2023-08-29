@@ -1,9 +1,11 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:side_panels/data/data.dart';
-import 'package:side_panels/data/trash_icon_icons.dart';
+import 'package:side_panels/data/expansion_tile/trash_icon_icons.dart';
+
+import '../data/expansion_tile/constants.dart';
+import '../widgets/expansion_tile/attribute_widget.dart';
+import '../widgets/expansion_tile/field_widget.dart';
 
 class DefaultPage extends StatefulWidget {
   const DefaultPage({super.key});
@@ -18,46 +20,6 @@ class _DefaultPageState extends State<DefaultPage> {
       Area(weight: 0.8),
     ],
   );
-
-  TextStyle helvetica24 = const TextStyle(
-      fontSize: 24, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
-  TextStyle inter14 = const TextStyle(
-      fontSize: 14, fontFamily: 'Inter', color: Color(0xff464F60));
-  TextStyle inter12 = const TextStyle(
-    fontSize: 12,
-    fontFamily: 'Inter',
-  );
-  TextStyle helvetica16 = const TextStyle(
-      fontSize: 16, fontFamily: 'HelveticaNeue', fontWeight: FontWeight.bold);
-
-  Color nodeColor = const Color(0xffECF2F9);
-  Color borderColor = const Color(0xffDADDE5);
-  Color buttonColor = const Color(0xff5A6376);
-  Color dividerColor = const Color(0xffC1C1C1);
-  double indentationLeft = 41;
-  double indentationRight = 27;
-  double sidePadding = 21;
-  Radius radius = const Radius.circular(6);
-  OutlineInputBorder border = OutlineInputBorder(
-      borderSide: const BorderSide(color: Color(0xffDADDE5)),
-      borderRadius: BorderRadius.circular(6));
-
-  InputDecoration fieldDecoration = InputDecoration(
-    filled: true,
-    fillColor: Colors.white,
-    border: InputBorder.none,
-    enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xffDADDE5)),
-        borderRadius: BorderRadius.circular(6)),
-    focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xffDADDE5)),
-        borderRadius: BorderRadius.circular(6)),
-    contentPadding: const EdgeInsets.symmetric(
-      vertical: 6,
-      horizontal: 12,
-    ),
-  );
-  double fieldHeight = 32;
 
   String? _dropdownValue;
 
@@ -146,7 +108,7 @@ class _DefaultPageState extends State<DefaultPage> {
                 style: helvetica24,
               ),
               children: [
-                for (var el in attributes) _attributeWidget(el),
+                for (var el in attributes) _attributeWidget(el),//AttributeWidget(title: el, onDelete: () { _deleteQuality(el); },),
               ],
             )
           ],
@@ -174,8 +136,6 @@ class _DefaultPageState extends State<DefaultPage> {
 
             });
           },
-          //tilePadding: EdgeInsets.zero,
-          //backgroundColor: nodeColor,
           controlAffinity: ListTileControlAffinity.leading,
           title: _qualityTitle(el, isExpanded),
           children: [
@@ -194,11 +154,12 @@ class _DefaultPageState extends State<DefaultPage> {
                     child: SizedBox(
                       height: fieldHeight,
                       child: TextField(
+                          controller: TextEditingController()..text = el,
                           style: inter14, decoration: fieldDecoration),
                     ),
                   ),
                   for (var el in attributeData)
-                    _field(el), //_qualityDataWidget(el),
+                    FieldWidget(title: el), //_qualityDataWidget(el),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: _deleteIconButton(el),
@@ -226,7 +187,7 @@ class _DefaultPageState extends State<DefaultPage> {
   }
 
   void _addQuality() {
-    attributes.add('${attributes.length + 1}th quality');
+    attributes.add('${attributes.length + 1} свойство');
   }
 
   void _deleteQuality(String quality) {
@@ -268,43 +229,8 @@ class _DefaultPageState extends State<DefaultPage> {
         borderRadius: BorderRadius.circular(5),
         color: nodeColor,
       ),
-      child: _field(element),
+      child: FieldWidget(title: element),
     );
   }
 
-  Widget _field(String title) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title),
-          const SizedBox(
-            height: 8,
-          ),
-          SizedBox(
-            height: fieldHeight,
-            child: (title == 'Тип')
-                ? DropdownButtonFormField(
-                    decoration: fieldDecoration,
-                    style: inter14,
-                    hint: (_dropdownValue == null)
-                        ? Text('')
-                        : Text(_dropdownValue!),
-                    items: PropertyTypes.values.map((e) {
-                      return DropdownMenuItem(
-                        child: Text(e.name),
-                        value: e.name,
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      _dropdownValue = value;
-                      setState(() {});
-                    })
-                : TextField(style: inter14, decoration: fieldDecoration),
-          ),
-        ],
-      ),
-    );
-  }
 }
