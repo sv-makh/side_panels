@@ -128,6 +128,7 @@ class _DefaultPage1State extends State<DefaultPage1> {
 
   void _deleteQuality(String quality) {
     attributes.remove(quality);
+    setState(() { });
   }
 
   Widget _primaryDataWidget(String element) {
