@@ -21,8 +21,6 @@ class _DefaultPageState extends State<DefaultPage> {
     ],
   );
 
-  String? _dropdownValue;
-
   List<String> attributes = List.from(attributesList);
 
   @override
@@ -214,7 +212,6 @@ class _DefaultPageState extends State<DefaultPage> {
             title,
             style: helvetica16,
           ),
-          //isExpanded ? SizedBox() : _deleteIconButton(title),
         ],
       ),
     );

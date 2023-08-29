@@ -8,6 +8,7 @@ import 'field_widget.dart';
 class AttributeWidget extends StatefulWidget {
   String title;
   VoidCallback onDelete;
+
   AttributeWidget({super.key, required this.title, required this.onDelete});
 
   @override
@@ -32,11 +33,8 @@ class _AttributeWidgetState extends State<AttributeWidget> {
           onExpansionChanged: (value) {
             setState(() {
               isExpanded = value;
-              print(isExpanded);
             });
           },
-          //tilePadding: EdgeInsets.zero,
-          //backgroundColor: nodeColor,
           controlAffinity: ListTileControlAffinity.leading,
           title: _qualityTitle(widget.title, isExpanded),
           children: [
@@ -55,11 +53,15 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                     child: SizedBox(
                       height: fieldHeight,
                       child: TextField(
-                          style: inter14, decoration: fieldDecoration),
+                        controller: TextEditingController()
+                          ..text = widget.title,
+                        style: inter14,
+                        decoration: fieldDecoration,
+                      ),
                     ),
                   ),
                   for (var el in attributeData)
-                    FieldWidget(title: el), //_qualityDataWidget(el),
+                    FieldWidget(title: el),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: _deleteIconButton(widget.title),
@@ -94,7 +96,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
-      padding: EdgeInsets.only(left: sidePadding, bottom: 17, top: 17),
+      padding: EdgeInsets.only(left: sidePadding, bottom: isExpanded ? 0 : 17, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -109,15 +111,15 @@ class _AttributeWidgetState extends State<AttributeWidget> {
             title,
             style: helvetica16,
           ),
-          isExpanded ? SizedBox() : Container(
-            transform: Matrix4.translationValues(0.0, -8.0, 0.0),
-            padding: const EdgeInsets.only(right: 17.0),
-            child: _deleteIconButton(title),
-          ),
+          isExpanded
+              ? SizedBox()
+              : Container(
+                  transform: Matrix4.translationValues(0.0, -8.0, 0.0),
+                  padding: const EdgeInsets.only(right: 17.0),
+                  child: _deleteIconButton(title),
+                ),
         ],
       ),
     );
   }
-
 }
-

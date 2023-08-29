@@ -11,13 +11,6 @@ class FieldWidget extends StatefulWidget {
   State<FieldWidget> createState() => _FieldWidgetState();
 }
 
-/*class _FieldWidgetState extends State<FieldWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}*/
-
 class _FieldWidgetState extends State<FieldWidget> {
   String? _dropdownValue;
 

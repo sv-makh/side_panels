@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:side_panels/data/data.dart';
-import 'package:side_panels/data/expansion_tile/trash_icon_icons.dart';
 
 import '../data/expansion_tile/constants.dart';
 import '../widgets/expansion_tile/attribute_widget.dart';
@@ -35,7 +34,7 @@ class _DefaultPage1State extends State<DefaultPage1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ExpansionTile'),
+        title: const Text('ExpansionTile1'),
       ),
       body: MultiSplitViewTheme(
         data: MultiSplitViewThemeData(
@@ -108,82 +107,18 @@ class _DefaultPage1State extends State<DefaultPage1> {
                 style: helvetica24,
               ),
               children: [
-                //for (var el in attributes) _attributeWidget(el),
-                for (var el in attributes) AttributeWidget(title: el, onDelete: () { _deleteQuality(el); },),
+                for (var el in attributes)
+                  AttributeWidget(
+                    title: el,
+                    onDelete: () {
+                      _deleteQuality(el);
+                    },
+                  ),
               ],
             )
           ],
         ),
       ),
-    );
-  }
-
-  Widget _attributeWidget(String el) {
-    bool isExpanded = false;
-
-    return Container(
-      margin: EdgeInsets.only(
-        bottom: 20,
-      ),
-      padding: EdgeInsets.only(left: indentationLeft, right: indentationRight),
-      child: ListTileTheme(
-        minVerticalPadding: 0,
-        contentPadding: EdgeInsets.zero,
-        dense: true,
-        child: ExpansionTile(
-          onExpansionChanged: (value) {
-            isExpanded = value;
-            setState(() {
-
-            });
-          },
-          controlAffinity: ListTileControlAffinity.leading,
-          title: _qualityTitle(el, isExpanded),
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: indentationLeft),
-              padding: EdgeInsets.only(left: sidePadding, right: sidePadding),
-              color: nodeColor,
-              child: Column(
-                children: [
-                  Container(
-                    height: 1,
-                    color: dividerColor,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 8, bottom: 10),
-                    child: SizedBox(
-                      height: fieldHeight,
-                      child: TextField(
-                          controller: TextEditingController()..text = el,
-                          style: inter14, decoration: fieldDecoration),
-                    ),
-                  ),
-                  for (var el in attributeData)
-                    FieldWidget(title: el), //_qualityDataWidget(el),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: _deleteIconButton(el),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _deleteIconButton(String el) {
-    return IconButton(
-      icon: Icon(
-        TrashIcon.curved_trash,
-        color: buttonColor,
-      ),
-      onPressed: () {
-        _deleteQuality(el);
-        setState(() {});
-      },
     );
   }
 
@@ -193,31 +128,6 @@ class _DefaultPage1State extends State<DefaultPage1> {
 
   void _deleteQuality(String quality) {
     attributes.remove(quality);
-  }
-
-  Widget _qualityTitle(String title, bool isExpanded) {
-    return Container(
-      height: 54,
-      margin: const EdgeInsets.only(left: 5),
-      padding: EdgeInsets.only(left: sidePadding, bottom: 17, top: 17),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: radius,
-          topRight: radius,
-        ),
-        color: nodeColor,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: helvetica16,
-          ),
-          //isExpanded ? SizedBox() : _deleteIconButton(title),
-        ],
-      ),
-    );
   }
 
   Widget _primaryDataWidget(String element) {
@@ -233,5 +143,4 @@ class _DefaultPage1State extends State<DefaultPage1> {
       child: FieldWidget(title: element),
     );
   }
-
 }
