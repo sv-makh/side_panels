@@ -37,7 +37,7 @@ Color borderColor = const Color(0xffDADDE5);
 Color buttonColor = const Color(0xff5A6376);
 Color dividerColor = const Color(0xffC1C1C1);
 
-double indentationLeft = 41;
+double indentationLeft = 50;//41;
 double indentationRight = 27;
 double sidePadding = 21;
 

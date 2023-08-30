@@ -50,7 +50,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
           title: _attributeTitle(shownTitle, isExpanded),
           children: [
             Container(
-              margin: EdgeInsets.only(left: indentationLeft),
+              margin: EdgeInsets.only(left: indentationLeft-9),
               padding: EdgeInsets.only(left: sidePadding, right: sidePadding),
               color: nodeColor,
               child: Column(
