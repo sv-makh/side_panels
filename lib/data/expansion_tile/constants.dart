@@ -38,16 +38,27 @@ Color buttonColor = const Color(0xff5A6376);
 Color dividerColor = const Color(0xffC1C1C1);
 Color iconColor = const Color(0xff49454E);
 
-double indentationLeft = 50;//41;
+double indentationLeft = 50;
 double indentationRight = 27;
 double sidePadding = 21;
+double bottomPanelHeight = 59;
+
+ButtonStyle addButtonStyle = OutlinedButton.styleFrom(
+  padding: const EdgeInsets.only(right: 8, left: 8),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(4),
+  ),
+  foregroundColor: buttonColor,
+  textStyle: inter12,
+  side: BorderSide(color: borderColor),
+);
 
 Radius radius = const Radius.circular(6);
 OutlineInputBorder border = OutlineInputBorder(
     borderSide: const BorderSide(color: Color(0xffDADDE5)),
     borderRadius: BorderRadius.circular(6));
 
-//параметры полей ввода
+
 InputDecoration fieldDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,

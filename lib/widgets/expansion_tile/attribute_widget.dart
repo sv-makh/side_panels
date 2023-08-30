@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:side_panels/widgets/expansion_tile/delete_icon.dart';
 
 import '../../data/data.dart';
 import '../../data/expansion_tile/constants.dart';
-import '../../data/expansion_tile/trash_icon_icons.dart';
 import 'field_widget.dart';
 
 //виджет, отображающий одно свойство
@@ -52,7 +52,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
           title: _attributeTitle(shownTitle, isExpanded),
           children: [
             Container(
-              margin: EdgeInsets.only(left: indentationLeft-9),
+              margin: EdgeInsets.only(left: indentationLeft - 9),
               padding: EdgeInsets.only(left: sidePadding, right: sidePadding),
               color: nodeColor,
               child: Column(
@@ -90,18 +90,15 @@ class _AttributeWidgetState extends State<AttributeWidget> {
 
   Widget _deleteIconButton(String el) {
     return IconButton(
-      icon: Icon(
-        TrashIcon.curved_trash,
-        color: buttonColor,
-      ),
+      icon: DeleteIcon(),
       onPressed: () {
-        _deleteQuality(el);
+        _deleteAttribute(el);
         setState(() {});
       },
     );
   }
 
-  void _deleteQuality(String quality) {
+  void _deleteAttribute(String quality) {
     widget.onDelete();
   }
 
@@ -120,7 +117,10 @@ class _AttributeWidgetState extends State<AttributeWidget> {
       child: Container(
         margin: EdgeInsets.only(right: sidePadding, bottom: 10),
         decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: isExpanded ? dividerColor : Colors.transparent)),
+          border: Border(
+            bottom: BorderSide(
+                color: isExpanded ? dividerColor : Colors.transparent),
+          ),
         ),
         child: Text(
           title,
