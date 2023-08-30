@@ -56,11 +56,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
               child: Column(
                 children: [
                   Container(
-                    height: 1,
-                    color: dividerColor,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 8, bottom: 10),
+                    padding: const EdgeInsets.only(top: 2, bottom: 10),
                     child: SizedBox(
                       height: fieldHeight,
                       child: TextField(
@@ -111,7 +107,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     return Container(
       height: 54,
       margin: const EdgeInsets.only(left: 5),
-      padding: EdgeInsets.only(left: sidePadding, top: 17),//, bottom: 17),
+      padding: EdgeInsets.only(left: sidePadding, top: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: radius,
@@ -120,11 +116,9 @@ class _AttributeWidgetState extends State<AttributeWidget> {
         color: nodeColor,
       ),
       child: Container(
-        //height: 10,
-        //margin: EdgeInsets.only(right: sidePadding),
-        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(right: sidePadding, bottom: 10),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.red),//dividerColor),
+          border: Border(bottom: BorderSide(color: isExpanded ? dividerColor : Colors.transparent)),
         ),
         child: Text(
           title,
