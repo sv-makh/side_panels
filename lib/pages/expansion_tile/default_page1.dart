@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 
-//import 'package:side_panels/data/data.dart';
 import 'package:side_panels/data/expansion_tile/attribute_model.dart';
 import 'package:side_panels/data/expansion_tile/data.dart';
-import 'package:side_panels/widgets/expansion_tile/class_widget.dart';
+import 'package:side_panels/widgets/expansion_tile/class_field_widget.dart';
 import 'package:side_panels/widgets/expansion_tile/delete_icon.dart';
-
-import '../../data/expansion_tile/class_model.dart';
 import '../../data/expansion_tile/constants.dart';
-import '../../data/expansion_tile/property_type.dart';
 import '../../widgets/expansion_tile/attribute_widget.dart';
 
 class DefaultPage1 extends StatefulWidget {

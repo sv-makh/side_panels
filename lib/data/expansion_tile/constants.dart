@@ -29,7 +29,7 @@ TextStyle inter12 = const TextStyle(
 TextStyle helvetica16 = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.bold,
-  fontFamily: 'HelveticaNeue',
+  //fontFamily: 'HelveticaNeue',
 );
 
 Color nodeColor = const Color(0xffECF2F9);

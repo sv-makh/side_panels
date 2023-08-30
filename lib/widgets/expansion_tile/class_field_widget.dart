@@ -4,7 +4,7 @@ import '../../data/expansion_tile/constants.dart';
 import 'field_widget.dart';
 
 //виджет, отображающий одно свойство класса
-//поля ввода для него отображает виджет FieldWidget
+//поле ввода для него отображает виджет FieldWidget
 
 class ClassFieldWidget extends StatelessWidget {
   String title;

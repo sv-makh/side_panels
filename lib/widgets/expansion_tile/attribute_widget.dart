@@ -95,7 +95,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 7.0, bottom: 17.0),
-                      child: _deleteIconButton(widget.attribute),
+                      child: _buttonDeleteAttribute(widget.attribute),
                     ),
                   ),
                 ],
@@ -107,7 +107,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     );
   }
 
-  Widget _deleteIconButton(AttributeModel el) {
+  Widget _buttonDeleteAttribute(AttributeModel el) {
     return IconButton(
       icon: DeleteIcon(),
       onPressed: () {
