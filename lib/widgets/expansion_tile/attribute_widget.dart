@@ -41,6 +41,8 @@ class _AttributeWidgetState extends State<AttributeWidget> {
         contentPadding: EdgeInsets.zero,
         dense: true,
         child: ExpansionTile(
+          iconColor: iconColor,
+          collapsedIconColor: iconColor,
           onExpansionChanged: (value) {
             setState(() {
               isExpanded = value;

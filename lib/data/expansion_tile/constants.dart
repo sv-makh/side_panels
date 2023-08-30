@@ -36,6 +36,7 @@ Color nodeColor = const Color(0xffECF2F9);
 Color borderColor = const Color(0xffDADDE5);
 Color buttonColor = const Color(0xff5A6376);
 Color dividerColor = const Color(0xffC1C1C1);
+Color iconColor = const Color(0xff49454E);
 
 double indentationLeft = 50;//41;
 double indentationRight = 27;

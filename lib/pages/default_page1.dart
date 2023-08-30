@@ -62,6 +62,8 @@ class _DefaultPage1State extends State<DefaultPage1> {
         child: Column(
           children: [
             ExpansionTile(
+              iconColor: iconColor,
+              collapsedIconColor: iconColor,
               initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
               title: Text(
@@ -77,6 +79,8 @@ class _DefaultPage1State extends State<DefaultPage1> {
               ],
             ),
             ExpansionTile(
+              iconColor: iconColor,
+              collapsedIconColor: iconColor,
               initiallyExpanded: true,
               controlAffinity: ListTileControlAffinity.leading,
               trailing: Container(
