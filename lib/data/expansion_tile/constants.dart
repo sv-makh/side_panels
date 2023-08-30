@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 TextStyle helvetica24 = const TextStyle(
   fontSize: 24,
-  //fontFamily: 'HelveticaNeue',
+  fontFamily: 'HelveticaNeue',
   fontWeight: FontWeight.bold,
 );
 TextStyle inter14 = const TextStyle(
@@ -29,7 +29,7 @@ TextStyle inter12 = const TextStyle(
 TextStyle helvetica16 = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.bold,
-  // fontFamily: 'HelveticaNeue');
+  fontFamily: 'HelveticaNeue',
 );
 
 Color nodeColor = const Color(0xffECF2F9);

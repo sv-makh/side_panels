@@ -94,8 +94,8 @@ flutter:
   fonts:
     - family: HelveticaNeue
       fonts:
-        - asset: assets/fonts/Helvetica-Neue-Regular.otf
-        - asset: assets/fonts/Helvetica-Neue-Condensed-Bold.ttf
+        - asset: assets/fonts/Helvetica-Neue-Cyr-Roman.ttf
+        - asset: assets/fonts/Helvetica-Neue-Cyr-Bold.ttf
           weight: 400
     - family: Inter
       fonts:
