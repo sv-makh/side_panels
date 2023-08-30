@@ -6,9 +6,11 @@ import 'field_widget.dart';
 //виджет, отображающий одно свойство класса
 //поля ввода для него отображает виджет FieldWidget
 
-class ClassWidget extends StatelessWidget {
+class ClassFieldWidget extends StatelessWidget {
   String title;
-  ClassWidget({super.key, required this.title});
+  String value;
+  bool bigField;
+  ClassFieldWidget({super.key, required this.title, required this.value, this.bigField = false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ClassWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         color: nodeColor,
       ),
-      child: FieldWidget(title: title),
+      child: FieldWidget(title: title, value: value, bigField: bigField),
     );
   }
 }

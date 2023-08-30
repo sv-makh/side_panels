@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:side_panels/data/expansion_tile/attribute_model.dart';
+import 'package:side_panels/data/expansion_tile/property_type.dart';
 import 'package:side_panels/widgets/expansion_tile/delete_icon.dart';
 
 import '../../data/data.dart';
@@ -9,10 +11,10 @@ import 'field_widget.dart';
 //поля ввода для него отображает виджет FieldWidget
 
 class AttributeWidget extends StatefulWidget {
-  String title;
+  AttributeModel attribute;
   VoidCallback onDelete;
 
-  AttributeWidget({super.key, required this.title, required this.onDelete});
+  AttributeWidget({super.key, required this.attribute, required this.onDelete});
 
   @override
   State<AttributeWidget> createState() => _AttributeWidgetState();
@@ -25,7 +27,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
   @override
   void initState() {
     super.initState();
-    shownTitle = widget.title;
+    shownTitle = widget.attribute.name ?? '';
   }
 
   @override
@@ -71,12 +73,29 @@ class _AttributeWidgetState extends State<AttributeWidget> {
                       ),
                     ),
                   ),
-                  for (var el in attributeData) FieldWidget(title: el),
+                  FieldWidget(title: 'ID', value: widget.attribute.id ?? ''),
+                  FieldWidget(
+                    title: 'Тип',
+                    value: (widget.attribute.type == null)
+                        ? PropertyType.string.name
+                        : widget.attribute.type!.name,
+                    propertyType: true,
+                  ),
+                  FieldWidget(
+                      title: 'Формат', value: widget.attribute.format ?? ''),
+                  FieldWidget(
+                      title: 'Пример', value: widget.attribute.example ?? ''),
+                  FieldWidget(
+                    title: 'Значимость',
+                    value: widget.attribute.importance == null
+                        ? ''
+                        : widget.attribute.importance!.toString(),
+                  ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 7.0, bottom: 17.0),
-                      child: _deleteIconButton(widget.title),
+                      child: _deleteIconButton(widget.attribute),
                     ),
                   ),
                 ],
@@ -88,7 +107,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     );
   }
 
-  Widget _deleteIconButton(String el) {
+  Widget _deleteIconButton(AttributeModel el) {
     return IconButton(
       icon: DeleteIcon(),
       onPressed: () {
@@ -98,7 +117,7 @@ class _AttributeWidgetState extends State<AttributeWidget> {
     );
   }
 
-  void _deleteAttribute(String quality) {
+  void _deleteAttribute(AttributeModel el) {
     widget.onDelete();
   }
 

@@ -16,12 +16,6 @@ class MyHomePage extends StatelessWidget {
               },
               child: Text('ExpansionTile'),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/ExpansionTile1');
-              },
-              child: Text('ExpansionTile1'),
-            ),
             Divider(),
             TextButton(
               onPressed: () {

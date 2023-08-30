@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../../data/data.dart';
 import '../../data/expansion_tile/constants.dart';
+import '../../data/expansion_tile/property_type.dart';
 
 //виджет для отображения полей свойства
 //либо TextField, либо выпадающий список (для поля 'Тип')
 
 class FieldWidget extends StatefulWidget {
   String title;
+  String value;
+  bool bigField;
+  bool propertyType;
 
-  FieldWidget({super.key, required this.title});
+  FieldWidget({
+    super.key,
+    required this.title,
+    required this.value,
+    this.bigField = false,
+    this.propertyType = false,
+  });
 
   @override
   State<FieldWidget> createState() => _FieldWidgetState();
@@ -33,17 +42,17 @@ class _FieldWidgetState extends State<FieldWidget> {
             height: 8,
           ),
           SizedBox(
-            height: (widget.title == 'Описание') ? bigFieldHeight : fieldHeight,
-            child: (widget.title == 'Тип')
+            height: widget.bigField ? bigFieldHeight : fieldHeight,
+            child: widget.propertyType
                 ? DropdownButtonFormField(
                     icon: Icon(Icons.keyboard_arrow_down, size: 14),
                     decoration: fieldDecoration,
                     dropdownColor: Colors.white,
                     style: inter14,
                     hint: (_dropdownValue == null)
-                        ? Text('')
+                        ? Text(widget.value)
                         : Text(_dropdownValue!),
-                    items: PropertyTypes.values.map((e) {
+                    items: PropertyType.values.map((e) {
                       return DropdownMenuItem(
                         child: Text(e.name),
                         value: e.name,
@@ -54,11 +63,11 @@ class _FieldWidgetState extends State<FieldWidget> {
                       setState(() {});
                     })
                 : TextField(
+                    controller: TextEditingController()..text = widget.value,
                     style: inter14Field,
-                    decoration: (widget.title == 'Описание')
-                        ? bigFieldDecoration
-                        : fieldDecoration,
-                    maxLines: (widget.title == 'Описание') ? 4 : 1,
+                    decoration:
+                        widget.bigField ? bigFieldDecoration : fieldDecoration,
+                    maxLines: widget.bigField ? 4 : 1,
                   ),
           ),
         ],

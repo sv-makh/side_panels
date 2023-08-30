@@ -17,14 +17,3 @@ List<String> classData = [
   'Метаимя',
   'Описание',
 ];
-
-enum PropertyTypes {
-  string,
-  number,
-  integer,
-  boolean,
-  array,
-  object,
-  date,
-  dateTime,
-}

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
-import 'package:side_panels/data/data.dart';
+
+//import 'package:side_panels/data/data.dart';
+import 'package:side_panels/data/expansion_tile/attribute_model.dart';
+import 'package:side_panels/data/expansion_tile/data.dart';
 import 'package:side_panels/widgets/expansion_tile/class_widget.dart';
 import 'package:side_panels/widgets/expansion_tile/delete_icon.dart';
 
-import '../data/expansion_tile/constants.dart';
-import '../widgets/expansion_tile/attribute_widget.dart';
+import '../../data/expansion_tile/class_model.dart';
+import '../../data/expansion_tile/constants.dart';
+import '../../data/expansion_tile/property_type.dart';
+import '../../widgets/expansion_tile/attribute_widget.dart';
 
 class DefaultPage1 extends StatefulWidget {
   const DefaultPage1({super.key});
@@ -17,11 +22,9 @@ class DefaultPage1 extends StatefulWidget {
 class _DefaultPage1State extends State<DefaultPage1> {
   final MultiSplitViewController _controller = MultiSplitViewController(
     areas: [
-      Area(weight: 0.8),
+      Area(weight: 0.8, minimalSize: 280),
     ],
   );
-
-  List<String> attributes = List.from(attributesList);
 
   @override
   void dispose() {
@@ -90,15 +93,21 @@ class _DefaultPage1State extends State<DefaultPage1> {
                     initiallyExpanded: true,
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(
-                      firstLevel[0],
+                      'Основные данные',
                       style: helvetica24,
                     ),
                     children: [
-                      Column(
-                        children: [
-                          for (var el in classData) ClassWidget(title: el)
-                        ],
-                      )
+                      ClassFieldWidget(
+                          title: 'Имя класса', value: class1.name ?? ''),
+                      ClassFieldWidget(
+                          title: 'Класс ID', value: class1.id ?? ''),
+                      ClassFieldWidget(
+                          title: 'Метаимя', value: class1.metaName ?? ''),
+                      ClassFieldWidget(
+                        title: 'Описание',
+                        value: class1.description ?? '',
+                        bigField: true,
+                      ),
                     ],
                   ),
                   ExpansionTile(
@@ -106,27 +115,15 @@ class _DefaultPage1State extends State<DefaultPage1> {
                     collapsedIconColor: iconColor,
                     initiallyExpanded: true,
                     controlAffinity: ListTileControlAffinity.leading,
-                    trailing: Container(
-                      margin: EdgeInsets.only(right: indentationRight - 23),
-                      height: 28,
-                      width: 149,
-                      child: OutlinedButton(
-                        style: addButtonStyle,
-                        onPressed: () {
-                          _addAttribute();
-                          setState(() {});
-                        },
-                        child: const Text('+ Добавить свойство'),
-                      ),
-                    ),
+                    trailing: _buttonAttributeAdding(),
                     title: Text(
-                      firstLevel[1],
+                      'Свойства',
                       style: helvetica24,
                     ),
                     children: [
-                      for (var el in attributes)
+                      for (var el in class1.attributes ?? [])
                         AttributeWidget(
-                          title: el,
+                          attribute: el,
                           onDelete: () {
                             _deleteAttribute(el);
                           },
@@ -143,12 +140,37 @@ class _DefaultPage1State extends State<DefaultPage1> {
     );
   }
 
-  void _addAttribute() {
-    attributes.add('${attributes.length + 1} свойство');
+  Widget _buttonAttributeAdding() {
+    return Container(
+      margin: EdgeInsets.only(right: indentationRight - 23),
+      height: 28,
+      width: 149,
+      child: OutlinedButton(
+        style: addButtonStyle,
+        onPressed: () {
+          _addAttribute();
+          setState(() {});
+        },
+        child: const Text('+ Добавить свойство'),
+      ),
+    );
   }
 
-  void _deleteAttribute(String quality) {
-    attributes.remove(quality);
+  void _addAttribute() {
+    AttributeModel newAttr =
+        AttributeModel(name: '${class1.attributes!.length + 1} свойство');
+    if (class1.attributes != null) {
+      class1.attributes!.add(newAttr);
+    } else {
+      class1.attributes = [newAttr];
+    }
     setState(() {});
+  }
+
+  void _deleteAttribute(AttributeModel attribute) {
+    if (class1.attributes != null) {
+      class1.attributes!.remove(attribute);
+      setState(() {});
+    }
   }
 }
